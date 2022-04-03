@@ -17,7 +17,7 @@ __email__ = "liamburns@cmail.carleton.ca"
 
 con = sqlite3.connect('contributers.db')
 
-#Die
+
 class SampleApp(tk.Tk):
     """
     Each page is an instance its spesific page , when a new page is called that instance is destroyed. Going to need to find a way to pass the key on each time for spesific year.
