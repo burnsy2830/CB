@@ -1,3 +1,5 @@
+from tkinter import font
+from turtle import color, width
 from  fpdf import FPDF
 import tkinter as tk
 import sqlite3
@@ -17,7 +19,7 @@ __email__ = "liamburns@cmail.carleton.ca"
 con = sqlite3.connect('contributers.db')
 
 
-class SampleApp(tk.Tk):
+class b_k(tk.Tk):
     """
     Each page is an instance its spesific page , when a new page is called that instance is destroyed. Going to need to find a way to pass the key on each time for spesific year.
     probly a more efficent way to do this, maybe make each page a subclass of a master page class?
@@ -25,8 +27,14 @@ class SampleApp(tk.Tk):
     def __init__(self):
         self.key = None
         tk.Tk.__init__(self,self.key)
+        tk.Tk.wm_title(self,"CrossBooks")
+        tk.Tk.geometry(self, newGeometry='1920x1080')
+        tk.Tk.configure(self,bg='#54428E')
+        
+        
+       
         self._frame = None
-        self.switch_frame(StartPage,self.key)
+        self.switch_frame(StartPage,self.key,)
 
     def switch_frame(self, frame_class,key):
         """Destroys current frame and replaces it with a new one."""
@@ -41,8 +49,8 @@ class StartPage(tk.Frame):
     """ Startup page key for year is entered here"""
     def __init__(self, master,key):
         self.key = key
-        tk.Frame.__init__(self, master)
-        tk.Label(self, text="Enter The Year!").pack(side="top", fill="x", pady=10)
+        tk.Frame.__init__(self, master,bg="#54428E",)
+        tk.Label(self, text="Enter The Year!",fg="#AFE3C0").pack(side="top", fill="x", pady=10)
         enter = tk.Entry(self, bg='grey')
         enter.pack(side="top", fill='x', expand=True)
         tk.Button(self, text="Save Year", background="#6d88a8",command=lambda: self.save_key(enter.get())).pack()
@@ -59,14 +67,15 @@ class main_menue(tk.Frame):
     def __init__(self, master,key):
         self.key = key
         tk.Frame.__init__(self, master)
+        
         tk.Label(self, text="For The Year " + str(self.get_key())).grid(column=0,row=0)
-        tk.Button(self, text="New Entry",command=lambda: master.switch_frame(new_entry,self.get_key()),width=12).grid(row=1,column=0)
+        tk.Button(self, text="New Entry",command=lambda: master.switch_frame(new_entry,self.get_key()),width=15,height=5).grid(row=10,column=0)
 
-        tk.Button(self, text="Print Individual",command=lambda: master.switch_frame(prints1,self.get_key()),width=12).grid(row=1,column=1)
+        tk.Button(self, text="Print Individual",command=lambda: master.switch_frame(prints1,self.get_key()),width=15,height=5).grid(row=10,column=1)
 
-        tk.Button(self, text="Print Church",command=lambda: master.switch_frame(prints2,self.get_key()),width=12).grid(row=2,column=0)
+        tk.Button(self, text="Print Church",command=lambda: master.switch_frame(prints2,self.get_key()),width=15,height=5).grid(row=11,column=0)
 
-        tk.Button(self, text="Edit",command=lambda: master.switch_frame(edits,self.get_key()),width=12).grid(row=2,column=1)
+        tk.Button(self, text="Edit",command=lambda: master.switch_frame(edits,self.get_key()),width=15,height=5).grid(row=11,column=1)
 
 
 
@@ -169,7 +178,7 @@ def get_text(textbox):
     print(textbox.get())
 
 if __name__ == "__main__":
-    app = SampleApp()
+    app = b_k()
     app.mainloop()
 
 
