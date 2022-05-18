@@ -1,4 +1,4 @@
-from tkinter import font
+from tkinter import Tk, font
 from turtle import color, width
 from  fpdf import FPDF
 import tkinter as tk
@@ -26,10 +26,13 @@ class b_k(tk.Tk):
     """
     def __init__(self):
         self.key = None
+    
         tk.Tk.__init__(self,self.key)
         tk.Tk.wm_title(self,"CrossBooks")
         tk.Tk.geometry(self, newGeometry='1920x1080')
         tk.Tk.configure(self,bg='#54428E')
+         
+    
         
         
        
@@ -49,12 +52,13 @@ class StartPage(tk.Frame):
     """ Startup page key for year is entered here"""
     def __init__(self, master,key):
         self.key = key
-        tk.Frame.__init__(self, master,bg="#54428E",)
-        tk.Label(self, text="Enter The Year!",fg="#AFE3C0").pack(side="top", fill="x", pady=10)
+      
+        tk.Frame.__init__(self, master,bg="#54428E",height=1920,width=1080)
+        tk.Label(self,fg="#AFE3C0", text="ENteryear",height=5,width=10,bg="#54428E",).grid(row=1,column=0)
         enter = tk.Entry(self, bg='grey')
-        enter.pack(side="top", fill='x', expand=True)
-        tk.Button(self, text="Save Year", background="#6d88a8",command=lambda: self.save_key(enter.get())).pack()
-        tk.Button(self, text="Submit", background="#6d88a8",command=lambda: master.switch_frame(main_menue,self.get_key())).pack()
+        enter.grid(row=12)
+        tk.Button(self, text="Save Year", background="#6d88a8",command=lambda: self.save_key(enter.get())).grid(row=5,column=0)
+        tk.Button(self, text="Submit", background="#6d88a8",command=lambda: master.switch_frame(main_menue,self.get_key())).grid(row=10,column=0)
     def save_key(self,key_str):
         self.key = key_str
         print(key_str)
